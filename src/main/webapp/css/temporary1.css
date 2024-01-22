@@ -1,0 +1,95 @@
+body {
+    font-family: Arial, sans-serif;
+    background-image: url("../images/forest.jpg"); /* Путь к изображению фона */
+    background-size: cover; /* Масштабирование изображения фона, чтобы оно заполнило весь экран */
+    background-repeat: no-repeat; /* Запрет повторения изображения фона */
+    background-attachment: fixed; /* Фон остается зафиксированным при прокрутке страницы */
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    color: #333;
+    text-align: center;
+    margin: 20px 0;
+}
+
+.clock {
+    margin: 20px auto; /* Центрирование по горизонтали и добавление отступов сверху/снизу */
+    width: 50%;
+}
+
+.form-clock {
+    margin: 20px auto; /* Центрирование по горизонтали и добавление отступов сверху/снизу */
+    width: 50%;
+}
+
+.header-section {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 10px; /* Добавление внутренних отступов */
+    margin: 0;
+    background: white;
+    font-family: Arial, serif;
+    opacity: 0.75;
+}
+
+.lab-info p {
+    font-size: 40px;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-family: "cursive", serif;
+    color: #000000;
+    opacity: 1;
+}
+
+.lab-info{
+    flex:1;
+    background: #007bff;
+    text-align: center;
+    border: 5px solid #0c0a0a; /* Толщина, стиль и цвет рамки */
+}
+
+
+.owner-info {
+    flex: 1;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+}
+
+.logo {
+    flex: 1;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#buttonblock {
+    text-align: center;
+    margin: 20px auto; /* Центрирование блока с кнопкой по горизонтали и добавление отступов сверху/снизу */
+}
+
+#button {
+    padding: 10px 20px; /* Добавление отступов вокруг текста кнопки */
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #ffffff;
+    background-color: #007bff; /* Цвет фона кнопки */
+    border: 2px solid #0056b3; /* Цвет границы кнопки */
+    border-radius: 5px; /* Закругление углов кнопки */
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s; /* Плавные переходы при наведении курсора */
+}
+
+#button:hover {
+    background-color: #0056b3; /* Изменение цвета фона при наведении курсора */
+    color: #ffffff; /* Изменение цвета текста при наведении курсора */
+}
