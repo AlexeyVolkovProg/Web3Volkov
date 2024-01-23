@@ -1,24 +1,27 @@
 package web.lab3.server.utils;
 
 public class PointChecker {
-
-    //todo доделать реализацию
     public static boolean isPointInsideArea(double x, double y, double r){
-        return true;
+        return isPointInsideCircle(x, y, r) || isPointInsideRectangle(x, y, r) || isPointInsideTriangle(x, y, r);
     }
 
-    //todo доделать реализацию
     private static boolean isPointInsideTriangle(double x, double y, double r){
-        return true;
+        boolean isXInRange = (x >= 0 ) && (x <= r);
+        boolean isYInRange = (y <= 0) && (y >= -r);
+        boolean isFormula = y>(x-r);
+        return isXInRange && isYInRange && isFormula;
     }
 
-    //todo доделать реализацию
     private static boolean isPointInsideRectangle(double x, double y, double r){
-        return true;
+        boolean isXInRange = (x >= 0) && (x <= r);
+        boolean isYInRange = (y >= 0) && (y <= r/2);
+        return isXInRange && isYInRange;
     }
 
-    //todo доделать реализацию
     private static boolean isPointInsideCircle(double x, double y, double r){
-        return true;
+        boolean isXInRange = (x <= 0) && (x >= (-r));
+        boolean isYInRange = (y <= 0) && (y >= (-r));
+        boolean isFormula = (x*x + y*y) <= (r*r);
+        return isXInRange && isYInRange && isFormula;
     }
 }

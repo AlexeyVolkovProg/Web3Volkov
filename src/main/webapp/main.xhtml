@@ -46,30 +46,26 @@
                     <h:form id="coords-form" styleClass="selection" method="post" action="${pageContext.request.contextPath}/controllers">
                         <div>
                             <h:outputLabel value="X: " />
-                            <p:spinner id="x-coord-input" name="x" min="-4" max="4"  stepFactor="0.5" value="#{checkPointController.x}"/>
+                            <p:inputText name="x" styleClass="inputtext" value="#{checkPointController.x}"
+                                         id="x-coord-input"
+                                         required="true" maxlength="7"
+                                         requiredMessage="Value X is required"
+                                         validatorMessage="The value must be from -3 to 3">
+                                <f:converter converterId="jakarta.faces.Float"/>
+                                <f:validateDoubleRange minimum="-3" maximum="3"/>
+                                <h:message for="x-coord-input"/>
+                            </p:inputText>
                         </div>
                         <div>
                             <h:outputLabel value="Y: " />
-                            <p:inputText name="y" styleClass="inputtext" value="#{checkPointController.y}"
-                                         id="y-coord-input"
-                                         required="true" maxlength="7"
-                                         requiredMessage="Value Y is required"
-                                         validatorMessage="The value must be from -5 to 3">
-                                <f:converter converterId="jakarta.faces.Float"/>
-                                <f:validateDoubleRange minimum="-5" maximum="3"/>
-                                <h:message for="y-coord-input"/>
-                            </p:inputText>
+                            <p:spinner id="y-coord-input" name="x" min="-5" max="5"  stepFactor="0.5" value="#{checkPointController.y}"/>
                         </div>
                         <div>
                             <h:outputLabel value="R: " />
-                            <p:inputText name="r" id="r-coord-input" styleClass="inputtext" value="#{checkPointController.r}" placeholder="2.0"
-                                         required="true" maxlength="7"
-                                         requiredMessage="Value R is required"
-                                         validatorMessage="The value must be from 2 to 5">
-                                <f:converter converterId="jakarta.faces.Float"/>
-                                <f:validateDoubleRange minimum="2" maximum="5"/>
-                                <h:message for="r-coord-input"/>
-                            </p:inputText>
+                            <h:panelGrid  id="r-coord-input" styleClass="coords-input" columns="1" style="margin-bottom: 10px" >
+                                <p:inputText styleClass="coords-input" id="decimal" placeholder="2.0" value="#{checkPointController.r}"/>
+                                <p:slider for="decimal" minValue="2" maxValue="5" step="0.25" range="false" onSlideEnd="update_r()"/>
+                            </h:panelGrid>
 
                         </div>
                         <div id="submit-container">

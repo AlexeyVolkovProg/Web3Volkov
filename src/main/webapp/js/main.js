@@ -9,6 +9,17 @@ const getTableValues = (tableRows) => {
     return [...tableRows].map(row => row.innerText);
 }
 
+const update_r = () => {
+    const plot = new Plot(document.getElementById('coords-form:decimal').value,
+        points);
+    document.getElementById('coords-form:decimal').addEventListener("input", (e) => {
+        e.preventDefault();
+        if(validateR(document.getElementById('coords-form:decimal').value)) {
+            plot.r = document.getElementById('coords-form:decimal').value;
+        }
+    });
+}
+
 const init = () => {
     const xRes = getTableValues(document.getElementsByClassName('table-x'));
     const yRes = getTableValues(document.getElementsByClassName('table-y'));
@@ -23,14 +34,7 @@ const init = () => {
         createdAtRes[i].innerText = date.toLocaleDateString() + ' ' + date.toLocaleTimeString();
     }
 
-    const plot = new Plot(document.getElementById('coords-form:r-coord-input').value,
-        points);
-    document.getElementById('coords-form:r-coord-input').addEventListener("input", (e) => {
-        e.preventDefault();
-        if(validateR(document.getElementById('coords-form:r-coord-input').value)) {
-            plot.r = document.getElementById('coords-form:r-coord-input').value;
-        }
-    });
+    update_r();
 }
 window.onload = () =>{
     init();

@@ -10,11 +10,11 @@ class Plot {
     _chart = null;
     _colors = {
         area: '#007bff',
-        missPoint: '#BF616A',
-        hitPoint: '#A3BE8C',
+        missPoint: '#ee041a',
+        hitPoint: '#79fa0b',
     };
     _pointSizePx = 10;
-    _xValues = [-4, -3.5, -3, -2.5, -2, -1.5, -1, 0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4];
+    _yValues = [-5, -4.5, -4, -3.5, -3, -2.5, -2, -1.5, -1, 0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5];
 
     constructor(r, points) {
         if (validateR(r)) {
@@ -72,13 +72,13 @@ class Plot {
     _convertCoords(coords) {
         let {x, y} = coords;
 
-        const lastBound = this._xValues[this._xValues.length - 1];
-        if (x > lastBound) {
-            x = lastBound
+        const lastBound = this._yValues[this._yValues.length - 1];
+        if (y > lastBound) {
+            y = lastBound
         } else {
-            for (const coordBound of this._xValues) {
-                if (x <= coordBound) {
-                    x = coordBound;
+            for (const coordBound of this._yValues) {
+                if (y <= coordBound) {
+                    y = coordBound;
                     break;
                 }
             }
@@ -116,9 +116,8 @@ class Plot {
     }
 
     _updateForm() {
-
-        document.getElementById('coords-form:y-coord-input').value = this._cursorPosition.y.toFixed(6);
-        document.getElementById('coords-form:x-coord-input_input').value = this._cursorPosition.x.toFixed(1);
+        document.getElementById('coords-form:y-coord-input_input').value = this._cursorPosition.y.toFixed(1);
+        document.getElementById('coords-form:x-coord-input').value = this._cursorPosition.x.toFixed(6);
     }
 }
 
