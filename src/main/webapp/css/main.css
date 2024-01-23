@@ -1,39 +1,88 @@
 body {
-    color: white;
-    background-color: #24292f;
-    font-family: Segoe UI, serif;
+    color: #24292f;
+    font-family: 'Roboto', sans-serif;
+    background-color: #f0f5f5; /* Light blue background */
+    background-image: url("../images/forest.jpg"); /* Путь к изображению фона */
+    background-size: cover; /* Масштабирование изображения фона, чтобы оно заполнило весь экран */
+    background-repeat: no-repeat; /* Запрет повторения изображения фона */
+    background-attachment: fixed; /* Фон остается зафиксированным при прокрутке страницы */
 }
 
-.header {
-    width: 100%;
-    font-family: inherit;
-    padding: 10px;
+.header-section {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 10px; /* Добавление внутренних отступов */
+    margin: 0;
+    background: white;
+    font-family: Arial, serif;
+    opacity: 0.80;
 }
 
-.name{
+.lab-info p {
+    font-size: 40px;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-family: "cursive", serif;
+    color: #000000;
+    opacity: 1;
+}
+
+.lab-info{
+    flex:1;
+    background: #007bff;
+    text-align: center;
+    border: 5px solid #0c0a0a; /* Толщина, стиль и цвет рамки */
+}
+
+
+.owner-info {
+    flex: 1;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+}
+
+.logo {
+    flex: 1;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.name {
     width: 60%;
-    color: black;
+    color: #24292f; /* Dark blue text */
     border-radius: 10px;
     text-indent: 10%;
     text-align: center;
     font-size: 25px;
-    background-color: white;
+    background-color: #ffffff; /* White background */
     margin: 10px;
 }
-.info{
+
+.info {
     text-align: right;
 }
-.clock{
+
+.clock {
     position: fixed;
     width: 60px;
     height: 60px;
     right: 50px;
     bottom: 50px;
+    z-index: 1000;
 }
-circle:hover{
-    fill: #24292f;
+
+circle:hover {
+    fill: #f0f5f5; /* Light blue background on hover */
 }
-.main{
+
+.main {
     margin: 20px;
     display: flex;
     justify-content: space-around;
@@ -49,46 +98,53 @@ form input:disabled {
     height: 34px;
 }
 
-.main > div{
+.main > div {
     margin-left: 30px;
     width: 30%;
-    background-color: white;
-    border: 6px solid black;
+    background-color: #ffffff; /* White background */
+    border: 6px solid #042a57; /* Dark blue border */
     border-radius: 6px;
-    color: black;
+    color: #24292f; /* Dark blue text */
     text-align: center;
 }
-.main > div:first-child{
+
+.main > div:first-child {
     margin-left: 20px;
 }
-.selection{
+
+.selection {
     display: flex;
     justify-content: space-around;
     flex-direction: column;
 }
-.selection > div{
+
+.selection > div {
     text-align: left;
     padding: 20px;
 }
-#submit-container{
+
+#submit-container {
     text-align: center;
 }
-.results-container{
-    border: 6px solid black;
+
+.results-container {
+    border: 6px solid #24292f; /* Dark blue border */
     border-radius: 6px;
     margin: 40px;
+    opacity: 0.85;
 }
+
 .results-container table thead th {
-    background-color: white;
-    color: #24292f;
+    background-color: #ffffff; /* White background */
+    color: #24292f; /* Dark blue text */
     font-size: 17pt;
     padding: 10px;
     text-align: center;
 }
 
 .results-container table tbody td {
-    background-color: #24292f;
-    color: white;
+    background-color: #2983e8; /* Dark blue background */
+    color: #ffffff; /* White text */
     text-align: center;
     font-size: 15pt;
 }

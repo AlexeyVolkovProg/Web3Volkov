@@ -7,26 +7,31 @@
       xmlns:p="http://primefaces.org/ui">
 <f:view>
     <h:head>
-        <link href="#{request.contextPath}/css/main.css" rel="stylesheet" type="text/css"/>
         <title>Lab 3</title>
+        <link href="#{request.contextPath}/css/main.css" rel="stylesheet" type="text/css"/>
+        <script src="https://unpkg.com/function-plot/dist/function-plot.js" type="text/javascript"></script>
+        <script src="#{request.contextPath}/js/plot.js" type=""></script>
+        <script src="#{request.contextPath}/js/main.js" type=""></script>
     </h:head>
     <h:body>
         <f:view>
-            <table class="header">
-                <tr>
-                    <td>
-                        <a href="https://se.ifmo.ru/" target="_blank">
-                            <img src="#{request.contextPath}/images/itmo-logo-dark.svg" alt="log"/>
+            <div class="site-header">
+                <div class="header-section">
+                    <div class="logo">
+                        <a href="https://itmo.ru/?out">
+                            <img src="images/itmo-logo-dark.svg" alt=""/>
                         </a>
-                    </td>
-                    <td class="name"> Лабораторная работа 3 по Веб-программированию</td>
-                    <td class="info">
-                        Вариант: <a href="#{request.contextPath}/images/option.png" id="option">2327</a><br/>
-                        Выполнил: Попов Дмитрий Юрьевич<br/>
-                        Группа: P3213
-                    </td>
-                </tr>
-            </table>
+                    </div>
+                    <div class="lab-info">
+                        <p>Лабораторная работа №3</p>
+                    </div>
+                    <div class="owner-info">
+                        <p>Волков Алексей</p>
+                        <p>Группа: P3213</p>
+                        <p>Вариант: 2330</p>
+                    </div>
+                </div>
+            </div>
             <div class="clock">
                 <h:form>
                     <p:link outcome="to_index">
@@ -35,7 +40,7 @@
                 </h:form>
             </div>
             <div class="main">
-<!--                <div class="coords-info" id="plot"/>-->
+                <div class="coords-info" id="plot"/>
                 <div>
                     <h2>Введите коортидаты</h2>
                     <h:form id="coords-form" styleClass="selection" method="post" action="${pageContext.request.contextPath}/controllers">
@@ -71,7 +76,9 @@
                             <p:commandButton id="submit-btn" value="Отправить" styleClass="submit-btn">
                                 <f:ajax execute="@form"
                                         listener="#{checkPointController.checkPoint()}"
-                                        render="@all"/>
+                                        render="@all"
+                                        onevent="init"
+                                />
                             </p:commandButton>
                         </div>
                     </h:form>
