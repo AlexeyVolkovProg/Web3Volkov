@@ -32,12 +32,8 @@
                     </div>
                 </div>
             </div>
-            <div class="clock">
-                <h:form>
-                    <p:link outcome="to_index">
-                        <p:clock displayMode="analog" mode="server" autoSync="true" syncInterval="5000"/>
-                    </p:link>
-                </h:form>
+            <div id="buttonblock">
+                <p:button id="button" outcome="to_clock" value="Go to clock!"/>
             </div>
             <div class="main">
                 <div class="coords-info" id="plot"/>
@@ -53,6 +49,7 @@
                                          validatorMessage="The value must be from -3 to 3">
                                 <f:converter converterId="jakarta.faces.Float"/>
                                 <f:validateDoubleRange minimum="-3" maximum="3"/>
+                                <p:keyFilter regEx="/[\d\.]/"/>
                                 <h:message for="x-coord-input"/>
                             </p:inputText>
                         </div>
@@ -86,7 +83,9 @@
                         <f:facet name="header">
                             <h:outputText value="X"/>
                         </f:facet>
-                        <h:outputText styleClass="table-x" value="#{point.x}"/>
+                        <h:outputText styleClass="table-x" value="#{point.x}">
+                            <f:convertNumber pattern="#0.00" locale="en_US" />
+                        </h:outputText>
                     </p:column>
                     <p:column>
                         <f:facet name="header">
