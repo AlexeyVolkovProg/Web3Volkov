@@ -1,5 +1,7 @@
 ## Задание
 
+![image](https://github.com/AlexeyVolkovProg/WebThirdLab/assets/130671134/b5d2bc02-43e1-4506-b8b1-4395d36b7b99)
+![image](https://github.com/AlexeyVolkovProg/WebThirdLab/assets/130671134/06984d8a-49fb-443c-b213-a16486a2917b)
 ![image](https://github.com/AlexeyVolkovProg/WebThirdVolkov/assets/130671134/79e12e05-886e-40ed-892f-6afa4eba7d2a)
 
 Разработать приложение на базе JavaServer Faces Framework, которое осуществляет проверку попадания точки в заданную область на координатной плоскости.
