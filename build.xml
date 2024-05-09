@@ -1,0 +1,134 @@
+<project name="WebThirdLab" default="hello" basedir=".">
+    <property file="build.properties"/>
+
+    <!-- Зададим множество нужных нам путей к java файлам и библиотекам нужным нам для компиляции-->
+    <path id="classpath">
+        <fileset dir="${src.lib.dir}" includes="*.jar"/>
+        <fileset dir="${main.dir}" includes="*.java"/>
+    </path>
+
+
+    <!-- Зададим пути к библиотеке тестирования и компилированным классам -->
+    <path id="classpath.test">
+        <pathelement location="${junit}"/>
+        <pathelement location="${hamcrest}"/>
+        <pathelement location="${classes.dir}"/>
+    </path>
+
+    <!-- -->
+    <target name="clean">
+        <delete dir="${build.dir}"/>
+    </target>
+
+    <!-- Target compile отвечающий за компиляцию исходного кода проекта -->
+    <target name="compile" depends="clean">
+        <mkdir dir="${classes.dir}"/>
+        <!-- Компилируем все классы из main.dir в classes.dir используя пути classpath-->
+        <javac srcdir="${main.dir}" destdir="${classes.dir}" classpathref="classpath" includeantruntime="false"/>
+        <mkdir dir="${test.classes.dir}"/>
+        <!-- Компилируем все классы из test.dir в test.classes.dir используя пути classpath.test-->
+        <javac srcdir="${test.dir}" destdir="${test.classes.dir}" classpathref="classpath.test"
+               includeantruntime="false"/>
+        <copy todir="${classes.dir}">
+            <fileset dir="${java-resources.dir}"/>
+        </copy>
+    </target>
+
+    <!-- Target build собирает war (Web Archive)-->
+    <target name="build" depends="compile">
+        <!--Копируем все необходимые файлы JSP,JS, СSS в каталог war-->
+        <copy todir="${war_exploded.dir}">
+            <fileset dir="${web.dir}"/>
+        </copy>
+        <!--Копируем нужные библиотеки в war-->
+        <copy todir="${lib.dir}">
+            <fileset dir="${src.lib.dir}"/>
+        </copy>
+        <!--Создаем war -->
+        <war destfile="${build.dir}/${ant.project.name}.war">
+            <fileset dir="${war_exploded.dir}"/>
+        </war>
+    </target>
+
+    <!--Target test позволяет скомпилировать и запустить тесты-->
+    <target name="test" depends="compile">
+        <mkdir dir="${test.classes.dir}"/>
+        <javac destdir="${test.classes.dir}" srcdir="${test.dir}" includeantruntime="false"
+               classpathref="classpath.test"/>
+        <junit printsummary="on" haltonfailure="yes">
+            <classpath>
+                <path refid="classpath.test"/>
+                <pathelement location="${test.classes.dir}"/>
+            </classpath>
+            <formatter type="plain" usefile="false"/>
+            <batchtest>
+                <fileset dir="${test.dir}" includes="**/*Test*.java"/>
+            </batchtest>
+        </junit>
+    </target>
+
+    <!--Преобразование native2ascii для копий файлов локализации -->
+    <target name="native2ascii">
+        <mkdir dir="${encoding.dir}"/>
+        <echo message="Converting property files..."/>
+        <native2ascii reverse="true" encoding="${encoding.from}" src="${src.dir}" includes="**/*.properties"
+                      dest="${encoding.dir}"/>
+    </target>
+
+
+    <target name="team">
+        <mkdir dir="teamCommits"/>
+
+        <!-- Обновление репозитория до последнего коммита -->
+        <exec executable="git" dir="${git.repository.path}">
+            <arg value="pull"/>
+            <arg value="--rebase"/>
+        </exec>
+
+        <!-- Получение текущего хеша коммита и сохраним его в свойстве ant-->
+        <exec executable="git" dir="${git.repository.path}" outputproperty="current.commit">
+            <arg value="rev-parse"/>
+            <arg value="HEAD"/>
+        </exec>
+
+        <!--Вызов сборки проекта-->
+        <antcall target="build"/>
+
+        <!-- Копирование собранного проекта во временную директорию -->
+        <copy file="${build.dir}/${ant.project.name}.war"
+              tofile="teamCommits/${ant.project.name}_${current.commit}.war"
+              overwrite="false"/>
+
+        <!-- Получение хеша предпоследнего коммита -->
+        <exec executable="git" dir="${git.repository.path}" outputproperty="previous.commit">
+            <arg value="rev-parse"/>
+            <arg value="HEAD~1"/>
+        </exec>
+
+        <!-- Обновление репозитория до предпоследнего коммита -->
+        <exec executable="git" dir="${git.repository.path}">
+            <arg value="checkout"/>
+            <arg value="${previous.commit}"/>
+        </exec>
+
+        <antcall target="build"/>
+
+        <!-- Копирование собранного проекта во временную директорию -->
+        <copy file="${build.dir}/${ant.project.name}.war"
+              tofile="teamCommits/${ant.project.name}_${previous.commit}.war"
+              overwrite="false"/>
+
+        <!-- Создаем zip архив -->
+        <zip destfile="${build.dir}/team.zip"
+             basedir="./teamCommits"/>
+    </target>
+
+    <target name="teamClean">
+        <delete dir="build/team.zip"/>
+        <delete dir="teamCommits"/>
+    </target>
+
+    <target name="hello">
+        <echo message="Hello, Ant!"/>
+    </target>
+</project>
